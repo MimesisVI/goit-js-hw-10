@@ -15,22 +15,24 @@ function onSearch(event) {
   let inputValue = event.target.value.trim();
 
   if (!inputValue) {
-    listEl.innerHTML = ''
-    infoEl.innerHTML = ''
+    clearMarkup()
     return
   }
 
   fetchCountries(inputValue)
     .then(countries => {
       if (countries.length > 10) {
+        clearMarkup()
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
       }
       if (countries.length >= 2 && countries.length <= 10) {
+        clearMarkup()
         createCountriesList(countries);
       }
       if (countries.length === 1) {
+        clearMarkup()
         createCountriesCard(countries);
       }
     })
@@ -63,4 +65,10 @@ function createCountriesCard(countries) {
     .join('');
 
   infoEl.insertAdjacentHTML('beforeEnd', contryCard);
+}
+
+function clearMarkup () {
+  listEl.innerHTML = ''
+  infoEl.innerHTML = ''
+  return
 }
