@@ -43,8 +43,6 @@ function onSearch(event) {
 }
 
 function createCountriesList(countries) {
-  console.log(countries);
-
   const countryList = countries
     .map(({ name, flags }) => {
       return `<li><img src="${flags.svg}" width="30">${name.official}</li>`;
